@@ -11,7 +11,7 @@ Vue.use(UUID)
 Vue.use(VueClipboard)
 Vue.use(new VueSocketIO({
   debug: false,
-  connection: 'http://localhost:5000'
+  connection: 'https://dashboard.heroku.com/'
 }))
 
 Vue.config.productionTip = false
