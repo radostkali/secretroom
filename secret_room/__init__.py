@@ -8,9 +8,13 @@ redis = Redis()
 
 def create_app(debug=False):
     """Create an application."""
-    app = Flask(__name__, instance_relative_config=True)
+    app = Flask(__name__,
+                instance_relative_config=True,
+                template_folder="../dist",
+                static_folder="../dist/static")
     app.config.from_object('config')
     app.config.from_pyfile('config.py', silent=True)
+
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)

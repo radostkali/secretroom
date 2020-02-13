@@ -1,4 +1,4 @@
-from flask import jsonify, session, request
+from flask import jsonify, session, request, render_template
 from shortuuid import ShortUUID
 from . import main
 from secret_room import redis
@@ -15,6 +15,12 @@ api_messages = {
     'key_verified': {'status': 'success', 'message': 'Key verified'},
     'reconnected': {'status': 'reconnected', 'message': 'Reconnected'},
 }
+
+
+@main.route('/', defaults={'path': ''})
+@main.route('/<path:path>')
+def catch_all(path):
+    return render_template("index.html")
 
 
 @main.route('/api/create_room', methods=['POST'])

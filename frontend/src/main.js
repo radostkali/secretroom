@@ -10,7 +10,7 @@ import UUID from 'vue-uuid'
 Vue.use(UUID)
 Vue.use(VueClipboard)
 Vue.use(new VueSocketIO({
-  debug: true,
+  debug: false,
   connection: 'http://localhost:5000'
 }))
 

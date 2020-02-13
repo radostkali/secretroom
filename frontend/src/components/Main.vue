@@ -52,9 +52,9 @@
           <v-col xs12>
             <div class="info-block">
               <v-img class="info-image" contain src="/static/img/no-storing.png"></v-img>
-              <h2 class="info-title">Тo server storage</h2>
+              <h2 class="info-title">No server storage</h2>
               <p class="info-text">Messages are not stored in any database.<br>
-                The application uses <a href="https://redis.io/">Radis</a> to exchange public keys.</p>
+                The application uses <a href="https://redis.io/">Radis</a> only to exchange public keys.</p>
             </div>
           </v-col>
           <v-col xs12>
@@ -62,7 +62,7 @@
               <v-img class="info-image" contain src="/static/img/open-source.png"></v-img>
               <h2 class="info-title">Open source</h2>
               <p class="info-text">SECRET ROOM is an open source application made by<br>a novice developer.
-                Find code on <a href="https://github.com/openpgpjs/openpgpjs">GitHub</a></p>
+                Find code on <a href="https://github.com/radostkali/secretroom">GitHub</a></p>
             </div>
           </v-col>
         </v-row>
