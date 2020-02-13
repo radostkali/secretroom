@@ -1,9 +1,11 @@
 from flask import Flask
 from flask_redis import Redis
 from flask_socketio import SocketIO
+from flask_cors import CORS
 
 socketio = SocketIO()
 redis = Redis()
+cors = CORS()
 
 
 def create_app(debug=False):
@@ -19,6 +21,7 @@ def create_app(debug=False):
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
+    cors.init_app(app)
     redis.init_app(app, 'REDIS_ROOMS')
     socketio.init_app(app, cors_allowed_origins="*")
     return app
