@@ -11,9 +11,9 @@ Vue.use(UUID)
 Vue.use(VueClipboard)
 Vue.use(new VueSocketIO({
   debug: false,
-  connection: 'https://' + location.host + '/'
+  connection: 'http://' + location.host + ':5000/'
 }))
-
+console.log('http://' + location.host + '/')
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

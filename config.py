@@ -1,4 +1,6 @@
+import os
+
 DEBUG = False
 
 REDIS_ROOMS_DECODE_RESPONSES = True
-REDIS_ROOMS_URL = 'redis://127.0.0.1:6379/0'
+REDIS_ROOMS_URL = os.environ.get("REDIS_URL")
