@@ -13,7 +13,6 @@ Vue.use(new VueSocketIO({
   debug: false,
   connection: 'https://' + location.host
 }))
-console.log('https://' + location.host)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

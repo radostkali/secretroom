@@ -37,7 +37,6 @@ def create_room():
 
 @main.route('/api/check_room', methods=['GET'])
 def check_room():
-    print('check_room_func')
     room_id = request.args.get('room_id')
     if room_id is None:
         return jsonify(api_messages['error'])
@@ -73,7 +72,6 @@ def check_room():
 
 @main.route('/api/send_pubkey', methods=['POST'])
 def send_pubkey():
-    print('send_pubkey_func')
     try:
         room_id = session['room']
         user = int(session['user'])
@@ -95,7 +93,6 @@ def send_pubkey():
 
 @main.route('/api/verify_pubkey', methods=['POST'])
 def verify_pubkey():
-    print('verify_pubkey')
     try:
         room_id = session['room']
         user = int(session['user'])

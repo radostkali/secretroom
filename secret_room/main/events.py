@@ -15,7 +15,6 @@ def disconnect():
         'state': 'disconnected',
         'user': user
     }
-    print('Socket: User %s has disconnected and left the room %s.' % (user, room))
     emit(
         'room',
         response,
@@ -56,7 +55,6 @@ def on_join(data):
         'pubkey_1': keys['user_1'],
         'pubkey_2': keys['user_2']
     }
-    print('Socket: User %s has entered the room %s.' % (user, room))
     emit(
         'room',
         response,
@@ -80,7 +78,6 @@ def on_leave(data):
             'state': 'disconnected',
             'user': user
         }
-    print('Socket: User %s has left the room %s.' % (user, room))
     emit(
         'room',
         response,

@@ -22,7 +22,6 @@ export default {
       this.$store.dispatch('DELETE_KEYS')
       this.$store.dispatch('DELETE_USER')
       this.$store.dispatch('DELETE_PUBKEY')
-      this.$router.push({name: 'main'})
       axios.post(urlCreateRoom)
         .then(response => {
           this.roomId = response.data.room_id
