@@ -1,1 +1,1 @@
-web: gunicorn -k run.worker run:app
+web: gunicorn run.worker run:app
