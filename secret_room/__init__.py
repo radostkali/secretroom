@@ -17,7 +17,6 @@ def create_app(debug=False):
     app.config.from_object('config')
     app.config.from_pyfile('config.py', silent=True)
 
-
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
