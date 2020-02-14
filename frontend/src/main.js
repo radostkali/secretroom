@@ -11,6 +11,7 @@ Vue.use(UUID)
 Vue.use(VueClipboard)
 Vue.use(new VueSocketIO({
   debug: false,
+  // connection: 'http://localhost:5000'
   connection: 'https://' + location.host
 }))
 Vue.config.productionTip = false

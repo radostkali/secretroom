@@ -43,8 +43,6 @@ import NewRoom from './NewRoom'
 import { mapGetters } from 'vuex'
 import * as openpgp from '../../static/openpgp/openpgp.min.js'
 
-openpgp.initWorker({ path: '/static/openpgp/openpgp.worker.min.js' })
-
 export default {
   props: ['url'],
   components: { NewRoom },
@@ -82,6 +80,7 @@ export default {
             user: 0,
             color: 'success'
           })
+          this.disable = false
         }
       // User diconnect
       } else if (state === 'disconnected') {
@@ -91,6 +90,7 @@ export default {
           color: 'end'
         })
         this.$store.dispatch('DELETE_PUBKEY')
+        this.disable = true
       // User reconnect
       } else if (state === 'reconnecting') {
         this.messages.push({
@@ -98,6 +98,7 @@ export default {
           user: 0,
           color: 'default'
         })
+        this.disable = true
       // New message
       } else if (state === 'message') {
         if (data.user === this.user) {
@@ -211,8 +212,6 @@ export default {
     _pubkey: function (val) {
       if (val === '' || val === null) {
         this.disable = true
-      } else {
-        this.disable = false
       }
     }
   },
@@ -248,6 +247,17 @@ export default {
 
 .text-box {
   margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+  .chat-box {
+    width: 100%;
+    max-height: 70vh;
+    height: 70vh;
+  }
+  .text-box {
+    width: 95%;
+  }
 }
 
 .message-area {
@@ -307,11 +317,13 @@ export default {
 .message {
   margin: 0;
   color: black;
+  text-align: left;
 }
 
 .action-btns {
   display: flex;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 .action-btn {

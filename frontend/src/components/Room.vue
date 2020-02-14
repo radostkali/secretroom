@@ -2,21 +2,22 @@
   <div class="content">
     <div class="header">
       <h1 class="room-title">Room {{ $route.params.roomId }}</h1>
-      <v-btn title="Copy link" x-small text
-        v-clipboard:copy="url"
-        v-clipboard:success="onCopy">
-        <v-icon small :color="(copied) ? 'success' : ''">mdi-content-copy</v-icon>
-      </v-btn>
-      <my-keys v-if="connected">
-        <v-btn title="Public keys" x-small text :disabled="keys === {}">
-          <v-icon small>mdi-key-variant</v-icon>
+      <div class="btn-panel">
+        <v-btn title="Copy link" x-small text
+          v-clipboard:copy="url"
+          v-clipboard:success="onCopy">
+          <v-icon small :color="(copied) ? 'success' : ''">mdi-content-copy</v-icon>
         </v-btn>
-      </my-keys>
-      <v-btn v-if="connected" title="Reconnect" x-small text @click="reconnect">
-        <v-icon small>mdi-refresh</v-icon>
-      </v-btn>
+        <my-keys v-if="connected">
+          <v-btn title="Public keys" x-small text :disabled="keys === {}">
+            <v-icon small>mdi-key-variant</v-icon>
+          </v-btn>
+        </my-keys>
+        <v-btn v-if="connected" title="Reconnect" x-small text @click="reconnect">
+          <v-icon small>mdi-refresh</v-icon>
+        </v-btn>
+      </div>
     </div>
-    <br>
     <p v-if="!error && !connected">
       <v-progress-circular :value="progress"></v-progress-circular>
       <span>{{ progressText }}</span>
@@ -113,6 +114,7 @@ export default {
           let status = response.data.status
           if (status === 'success') {
             this.connected = true
+            this.$refs.chat.messages = []
             this.progress = 100
           } else if (status === 'error') {
             this.error = true
@@ -191,6 +193,25 @@ export default {
 
 .header {
   margin-top: 5rem;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .room-title {
+    font-size: 1.2rem;
+  }
+}
+
+.btn-panel {
   display: flex;
   justify-content: center;
   align-items: center;

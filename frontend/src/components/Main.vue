@@ -15,7 +15,7 @@
       </v-container>
     </div>
     <div class="text-block">
-      <v-stepper full-width>
+      <v-stepper>
         <v-stepper-header>
           <v-stepper-step
             @click="$refs.newroom.createRoom()"
@@ -61,7 +61,7 @@
             <div class="info-block">
               <v-img class="info-image" contain src="/static/img/open-source.png"></v-img>
               <h2 class="info-title">Open source</h2>
-              <p class="info-text">SECRET ROOM is an open source application made by<br>a novice developer.
+              <p class="info-text">SECRET ROOM is an open source application.<br>
                 Find code on <a href="https://github.com/radostkali/secretroom">GitHub</a></p>
             </div>
           </v-col>
