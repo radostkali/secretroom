@@ -223,7 +223,7 @@ export default {
 }
 
 .invisible {
-  display: none;
+  display: none !important;
 }
 
 .room-title {

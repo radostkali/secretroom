@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="chat-wrapper">
     <div class="chat-box">
       <div class="message-area">
         <div v-for="(message, i) in messages" :key="i" class="message-line">
@@ -233,6 +233,13 @@ export default {
 </script>
 
 <style scoped>
+.chat-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .chat-box {
   min-height: 3rem;
   max-height: 23rem;
@@ -316,8 +323,10 @@ export default {
 
 .message {
   margin: 0;
+  width: 100%;
   color: black;
   text-align: left;
+  word-wrap: break-word;
 }
 
 .action-btns {
