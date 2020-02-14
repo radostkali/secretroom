@@ -157,6 +157,7 @@ export default {
   },
   created () {
     this.checkRoom()
+    this.$socket.connect()
   },
   computed: {
     roomId: function () {
