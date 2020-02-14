@@ -134,10 +134,10 @@ export default {
         this.$socket.emit('leave', {command: 'reconnect'})
       }
       if (!soft) {
-        this.$socket.emit('leave', {command: 'leave'})
         this.$store.dispatch('DELETE_KEYS')
         this.$store.dispatch('DELETE_USER')
         this.$store.dispatch('DELETE_PUBKEY')
+        this.$socket.disconnect()
         this.$router.push({name: 'main'})
       }
     },
