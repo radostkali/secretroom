@@ -41,6 +41,25 @@ def message(data):
     )
 
 
+@socketio.on('writing')
+def writing(data):
+    try:
+        room = session['room']
+        user = session['user']
+    except KeyError as e:
+        print(e)
+    response = {
+        'state': 'writing',
+        'status': int(data['status']),
+        'user': user
+    }
+    emit(
+        'room',
+        response,
+        room=room
+    )
+
+
 @socketio.on('join')
 def on_join(data):
     user = data['user']

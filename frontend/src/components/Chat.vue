@@ -2,6 +2,11 @@
   <div class="chat-wrapper">
     <div class="chat-box">
       <div class="message-area">
+        <div class="writing-line">
+          <div class="writing-block" :class="writingHe ? 'writing' : ''">
+            <p class="writing-message">User is typing...</p>
+          </div>
+        </div>
         <div v-for="(message, i) in messages" :key="i" class="message-line">
           <div class="message-block"
             :class="(message.user === user) ? 'my-message' :
@@ -43,6 +48,8 @@ import NewRoom from './NewRoom'
 import { mapGetters } from 'vuex'
 import * as openpgp from '../../static/openpgp/openpgp.min.js'
 
+const newMessageSound = new Audio('../../static/sounds/just-like-that.mp3')
+
 export default {
   props: ['url'],
   components: { NewRoom },
@@ -53,7 +60,9 @@ export default {
       messageText: '',
       deliveredUUIDs: [],
       encryptedMessage: null,
-      disable: true
+      disable: true,
+      writingMe: false,
+      writingHe: false
     }
   },
   sockets: {
@@ -99,6 +108,11 @@ export default {
           color: 'default'
         })
         this.disable = true
+      // User writing
+      } else if (state === 'writing') {
+        if (data.user !== this.user) {
+          this.writingHe = data.status === 1
+        }
       // New message
       } else if (state === 'message') {
         if (data.user === this.user) {
@@ -116,6 +130,7 @@ export default {
               scroll = true
             }
             this.messages.push(msg)
+            newMessageSound.play()
             this.$nextTick(function () {
               el.scrollTop = (scroll) ? el.scrollHeight : el.scrollTop
             })
@@ -209,9 +224,18 @@ export default {
     }
   },
   watch: {
-    _pubkey: function (val) {
+    _pubkey (val) {
       if (val === '' || val === null) {
         this.disable = true
+      }
+    },
+    messageText (val) {
+      if (val === '' && this.writingMe === true) {
+        this.writingMe = false
+        this.$socket.emit('writing', {status: 0})
+      } else if (val !== '' && this.writingMe === false) {
+        this.writingMe = true
+        this.$socket.emit('writing', {status: 1})
       }
     }
   },
@@ -269,9 +293,11 @@ export default {
 
 .message-area {
   padding: 1rem;
+  padding-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  position: relative;
 }
 
 .message-line {
@@ -337,5 +363,33 @@ export default {
 
 .action-btn {
   margin: 0 0.5rem;
+}
+
+.writing-line {
+  position: absolute;
+  height: 2.5rem;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  overflow: hidden;
+}
+
+.writing-block {
+  border-radius: 0.7rem;
+  background: #ffffff;
+  transition: 0.3s all ease-out;
+  padding: 0.3rem 0.5rem;
+  transform: translate(0, 100%);
+  opacity: 0;
+}
+
+.writing.writing-block {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+
+.writing-message {
+  font-size: 0.8rem;
+  margin: 0;
 }
 </style>
