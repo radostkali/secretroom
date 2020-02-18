@@ -1,4 +1,4 @@
-# Secret Room
+# [Secret Room](https://secretroom.app)
 Web application thats provide private end-to-end GPG encrypted chatting for two people.
 
 ## Encription
